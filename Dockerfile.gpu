@@ -3,12 +3,11 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 MAINTAINER Yulia Yakovleva <robolamp@ya.ru>
 
 # ARG THEANO_VERSION=latest
-ARG TENSORFLOW_VERSION=latest
+# ARG TENSORFLOW_VERSION=latest
 ARG TENSORFLOW_ARCH=gpu
-ARG KERAS_VERSION=latest
-ARG LASAGNE_VERSION=latest
+ARG KERAS_VERSION=2.0.8
+ARG LASAGNE_VERSION=v0.1
 ARG TORCH_VERSION=latest
-ARG CAFFE_VERSION=master
 
 RUN echo -e "\n**********************\nNVIDIA Driver Version\n**********************\n" && \
 	cat /proc/driver/nvidia/version && \
