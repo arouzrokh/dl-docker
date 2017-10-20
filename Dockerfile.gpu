@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
 
 MAINTAINER Yulia Yakovleva <robolamp@ya.ru>
 
@@ -24,77 +24,23 @@ RUN apt-get update && apt-get install -y \
 		g++ \
 		gfortran \
 		git \
-		# libffi-dev \
-		# libfreetype6-dev \
-		# libhdf5-dev \
-		# libjpeg-dev \
-		# liblcms2-dev \
-		# libopenblas-dev \
-		# liblapack-dev \
-		# libopenjpeg2 \
-		# libpng12-dev \
-		# libssl-dev \
-		# libtiff5-dev \
-		# libwebp-dev \
-		# libzmq3-dev \
 		nano \
 		pkg-config \
-		# software-properties-common \
 		unzip \
 		vim \
 		wget \
-		# zlib1g-dev \
-		# qt5-default \
-		# libvtk6-dev \
-		# zlib1g-dev \
-		# libjpeg-dev \
-		# libwebp-dev \
-		# libpng-dev \
-		# libtiff5-dev \
-		# libjasper-dev \
-		# libopenexr-dev \
-		# libgdal-dev \
-		# libdc1394-22-dev \
-		# libavcodec-dev \
-		# libavformat-dev \
-		# libswscale-dev \
-		# libtheora-dev \
-		# libvorbis-dev \
-		# libxvidcore-dev \
-		# libx264-dev \
-		# yasm \
-		# libopencore-amrnb-dev \
-		# libopencore-amrwb-dev \
-		# libv4l-dev \
-		# libxine2-dev \
-		# libtbb-dev \
-		# libeigen3-dev \
 		python-dev \
 		python-tk \
-		# python-numpy \
 		python3-dev \
 		python3-tk \
-		# python3-numpy \
 		ant \
 		default-jdk \
 		doxygen \
 		python-pip \
 		python3-pip
 
-	# 	&& \
-	# apt-get clean && \
-	# apt-get autoremove && \
-	# rm -rf /var/lib/apt/lists/*
 # Link BLAS library to use OpenBLAS using the alternatives mechanism (https://www.scipy.org/scipylib/building/linux.html#debian-ubuntu)
 #	update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3
-
-# Install pip3
-# RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-# 	python get-pip.py && \
-# 	rm get-pip.py
-
-# RUN apt-get install python-pip
-
 
 # Add SNI support to Python
 RUN pip3 --no-cache-dir install \
@@ -126,7 +72,6 @@ RUN pip install --upgrade pip
 RUN pip3 --no-cache-dir install --upgrade ipython && \
 	pip3 --no-cache-dir install \
 		Cython \
-#		ipykernel \
 		jupyter \
 		path.py \
 		Pillow \
@@ -135,13 +80,9 @@ RUN pip3 --no-cache-dir install --upgrade ipython && \
 		sphinx \
 		wheel \
 		zmq
-	# 	&& \
-	# python -m ipykernel.kernelspec
-
 
 # Install TensorFlow
 RUN pip3 --no-cache-dir install tensorflow-gpu
-
 
 # Install dependencies for Caffe
 # RUN apt-get update && apt-get install -y \
@@ -195,9 +136,8 @@ RUN pip3 --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_
 # RUN pip3 --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git
 
 
-RUN apt-get update && apt-get install -y sudo
-
 # Install Torch
+# RUN apt-get update && apt-get install -y sudo
 # ENV TORCH_NVCC_FLAGS="-D__CUDA_NO_HALF_OPERATORS__"
 #
 # RUN git clone https://github.com/torch/distro.git /root/torch --recursive && \
@@ -233,10 +173,7 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	mkdir build && \
 	cd build && \
 	cmake -D CMAKE_BUILD_TYPE=RELEASE -DWITH_QT=OFF -DWITH_OPENGL=OFF -DFORCE_VTK=ON -DWITH_CUDA=ON -DWITH_TBB=ON -DWITH_GDAL=ON \
-	-DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_XINE=ON -DBUILD_EXAMPLES=OFF -DBUILD_NEW_PYTHON_SUPPORT=ON .. && \
-	# cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local \
-	# -D WITH_CUDA=ON -D WITH_V4L=ON -D BUILD_NEW_PYTHON_SUPPORT=ON \
-	# -D WITH_QT=OFF -D WITH_OPENGL=ON -D FORCE_VTK=ON -D WITH_TBB=ON -D BUILD_EXAMPLES=OFF .. && \
+	-DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_XINE=ON -DBUILD_EXAMPLES=OFF -DBUILD_NEW_PYTHON_SUPPORT=ON -DBUILD_FAT_JAVA_LIB=OFF .. && \
 	make -j"$(nproc)" && \
 	make install && \
 	ldconfig && \
