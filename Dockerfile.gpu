@@ -2,7 +2,7 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 MAINTAINER Yulia Yakovleva <robolamp@ya.ru>
 
-ARG THEANO_VERSION=latest
+# ARG THEANO_VERSION=latest
 ARG TENSORFLOW_VERSION=latest
 ARG TENSORFLOW_ARCH=gpu
 ARG KERAS_VERSION=latest
@@ -180,14 +180,13 @@ RUN pip3 --no-cache-dir install tensorflow-gpu
 
 
 # Install Theano and set up Theano config (.theanorc) for CUDA and OpenBLAS
-RUN pip3 --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_VERSION} && \
-	\
-	echo "[global]\ndevice=gpu\nfloatX=float32\noptimizer_including=cudnn\nmode=FAST_RUN \
-		\n[lib]\ncnmem=0.95 \
-		\n[nvcc]\nfastmath=True \
-		\n[blas]\nldflag = -L/usr/lib/openblas-base -lopenblas \
-		\n[DebugMode]\ncheck_finite=1" \
-	> /root/.theanorc
+# RUN pip3 --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_VERSION} && \
+# 	\
+# 	echo "[global]\ndevice=gpu\nfloatX=float32\noptimizer_including=cudnn\nmode=FAST_RUN \
+# 		\n[lib]\ncnmem=0.95 \
+# 		\n[nvcc]\nfastmath=True \
+# 		\n[DebugMode]\ncheck_finite=1" \
+# 	> /root/.theanorc
 
 
 # Install Keras
