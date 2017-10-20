@@ -10,11 +10,11 @@ ARG LASAGNE_VERSION=latest
 ARG TORCH_VERSION=latest
 ARG CAFFE_VERSION=master
 
-#RUN echo -e "\n**********************\nNVIDIA Driver Version\n**********************\n" && \
-#	cat /proc/driver/nvidia/version && \
-#	echo -e "\n**********************\nCUDA Version\n**********************\n" && \
-#	nvcc -V && \
-#	echo -e "\n\nBuilding your Deep Learning Docker Image...\n"
+RUN echo -e "\n**********************\nNVIDIA Driver Version\n**********************\n" && \
+	cat /proc/driver/nvidia/version && \
+	echo -e "\n**********************\nCUDA Version\n**********************\n" && \
+	nvcc -V && \
+	echo -e "\n\nBuilding your Deep Learning Docker Image...\n"
 
 # Install some dependencies
 RUN apt-get update && apt-get install -y \
@@ -82,7 +82,7 @@ RUN apt-get update && apt-get install -y \
 		&& \
 	apt-get clean && \
 	apt-get autoremove && \
-	rm -rf /var/lib/apt/lists/* && \
+	rm -rf /var/lib/apt/lists/*
 # Link BLAS library to use OpenBLAS using the alternatives mechanism (https://www.scipy.org/scipylib/building/linux.html#debian-ubuntu)
 #	update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3
 
