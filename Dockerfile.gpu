@@ -198,6 +198,8 @@ RUN pip3 --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_
 RUN apt-get update && apt-get install -y sudo
 
 # Install Torch
+ENV TORCH_NVCC_FLAGS="-D__CUDA_NO_HALF_OPERATORS__"
+
 RUN git clone https://github.com/torch/distro.git /root/torch --recursive && \
 	cd /root/torch && \
 	bash install-deps && \
@@ -230,7 +232,10 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	cd /root/opencv && \
 	mkdir build && \
 	cd build && \
-	cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON .. && \
+	# cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON .. && \
+	cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local \
+	-D WITH_CUDA=ON -D WITH_V4L=ON -D BUILD_NEW_PYTHON_SUPPORT=ON \
+	-D WITH_QT=ON -D WITH_OPENGL=ON -D FORCE_VTK=ON -D WITH_TBB=ON -D BUILD_EXAMPLES=OFF
 	make -j"$(nproc)"  && \
 	make install && \
 	ldconfig && \
