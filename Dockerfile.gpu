@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 		cmake \
 		curl \
 		g++ \
-		gfortran \python3-pip
+		gfortran \
 		git \
 		# libffi-dev \
 		# libfreetype6-dev \
