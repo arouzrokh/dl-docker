@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 		cmake \
 		curl \
 		g++ \
-		gfortran \
+		gfortran \python3-pip
 		git \
 		# libffi-dev \
 		# libfreetype6-dev \
@@ -91,7 +91,7 @@ RUN apt-get update && apt-get install -y \
 # 	python get-pip.py && \
 # 	rm get-pip.py
 
-RUN apt-get install python3-pip
+RUN apt-get install python-pip
 
 
 # Add SNI support to Python
