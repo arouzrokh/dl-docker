@@ -193,7 +193,7 @@ RUN pip3 --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_
 
 
 # Install Lasagne
-RUN pip3 --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
+RUN pip3 --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git
 
 
 # Install Torch
