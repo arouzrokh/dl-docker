@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 MAINTAINER Yulia Yakovleva <robolamp@ya.ru>
 
@@ -168,16 +168,16 @@ RUN pip3 --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_
 # 	luarocks make
 
 # Install OpenCV
-RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
-	cd /root/opencv && \
-	mkdir build && \
-	cd build && \
-	cmake -D CMAKE_BUILD_TYPE=RELEASE -DWITH_QT=OFF -DWITH_OPENGL=OFF -DFORCE_VTK=ON -DWITH_CUDA=ON -DWITH_TBB=ON -DWITH_GDAL=ON \
-	-DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_XINE=ON -DBUILD_EXAMPLES=OFF -DBUILD_NEW_PYTHON_SUPPORT=ON -DBUILD_FAT_JAVA_LIB=OFF .. && \
-	make -j"$(nproc)" && \
-	make install && \
-	ldconfig && \
-	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
+# RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
+# 	cd /root/opencv && \
+# 	mkdir build && \
+# 	cd build && \
+# 	cmake -D CMAKE_BUILD_TYPE=RELEASE -DWITH_QT=OFF -DWITH_OPENGL=OFF -DFORCE_VTK=ON -DWITH_CUDA=ON -DWITH_TBB=ON -DWITH_GDAL=ON \
+# 	-DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_XINE=ON -DBUILD_EXAMPLES=OFF -DBUILD_NEW_PYTHON_SUPPORT=ON -DBUILD_FAT_JAVA_LIB=OFF .. && \
+# 	make -j"$(nproc)" && \
+# 	make install && \
+# 	ldconfig && \
+# 	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
 
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
