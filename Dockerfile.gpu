@@ -59,6 +59,7 @@ RUN apt-get update && apt-get install -y \
 
 # Upgrade pip
 RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 # Install other useful Python packages using pip3
 RUN pip3 --no-cache-dir install --upgrade ipython && \
@@ -71,6 +72,8 @@ RUN pip3 --no-cache-dir install --upgrade ipython && \
 		six \
 		sphinx \
 		wheel \
+		keras \
+		tqdm \
 		zmq
 
 # Install TensorFlow
