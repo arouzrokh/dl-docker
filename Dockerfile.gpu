@@ -148,7 +148,7 @@ RUN apt-get update && apt-get install -y \
 
 # Upgrade pip
 RUN pip install --upgrade pip
-RUN pip3 install --upgrade pip
+# RUN pip3 install --upgrade pip
 
 # Install other useful Python packages using pip
 RUN pip --no-cache-dir install --upgrade ipython && \
@@ -172,6 +172,7 @@ RUN pip --no-cache-dir install --upgrade ipython && \
 RUN pip3 --no-cache-dir install --upgrade ipython && \
 	pip3 --no-cache-dir install \
 		Cython \
+		ipykernel \
 		jupyter \
 		path.py \
 		Pillow \
