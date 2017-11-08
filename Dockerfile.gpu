@@ -179,7 +179,6 @@ RUN pip3 --no-cache-dir install --upgrade ipython && \
 		six \
 		sphinx \
 		wheel \
-		ipykernel \
 		jupyter \
 		path.py \
 		Pillow \
